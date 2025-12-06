@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  <title>UniTabBank</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">UniTabBank: A Large Scale Multi-Lingual, Multi-Layout, Multi-Type, Multi-Format Dataset for Table Detection</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=ai9lifYAAAAJ&hl=en">Ajoy Mondal</a>,</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?user=bmRxLdAAAAAJ&hl=en">Saumya Mundra</a>,</span>
+            <span class="author-block">
+              <a href="https://avijit9.github.io/">Avijit Dasgupta</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://faculty.iiit.ac.in/~jawahar/">C. V. Jawahar</a>
+            </span>            
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">CVIT, IIIT Hyderabad, India</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2011.12948"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2011.12948"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/google/nerfies"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="https://github.com/google/nerfies/releases/tag/0.1"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+      <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Tables play a key role in conveying structured data across documents. Accurate table detection is crucial for downstream tasks like structure recognition and information extraction. However, current datasets lack diversity in format, language, and layout, limiting real-world generalization. This underscores the need for well-annotated datasets that are <b>multi-lingual</b>, <b>layout-diverse</b>, <b>document-agnostic</b>, and <b>format-rich</b>.
+          </p>
+          <p>
+            To address these limitations, we introduce <b>UniTabBank</b>, a large scale, diverse table detection dataset designed to reflect realistic use cases. <b>UniTabBank</b> is characterized by five key attributes: (i) <b>Multi-Lingual</b> — supporting 28 languages (including Arabic, English, Hindi, etc.); (ii) <b>Multi-Layout</b> — encompassing both single-column and multi-column documents; (iii) <b> Multi-Type</b> — covering a wide range of document genres such as annual reports, books, newspapers, and magazines; (iv) <b>Multi-Format</b> — comprising scanned documents, photographed pages, and PDFs; and finally (v) <b>Scale and Annotation Quality</b> — consists of 55,443 document page images with 81,179 accurately annotated table instances, offering scale and annotation precision. 
+          </p>
+          <p>
+            Additionally, we introduce <b>UniTabDet</b>, a YOLO-based model for table detection, which outperforms state-of-the-arts on eight out of nine table detection benchmarks. Cross-benchmark evaluation highlights the strong generalization capability of <b>UniTabBank</b> compared to existing benchmarks. 
+          </p>
+        </div>    
+      <!--/ Abstract. -->
+  </div>
+</section>     
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- UniTabBank. -->
+     <h2 class="title is-3">UniTabBank Dataset</h2>
+        <div class="content has-text-justified">
+          <p>
+            The UniTabBank dataset comprises a total of 55,443 document images, organized into four primary categories based on content and layout: Annual Report (55%), Book (21%), Magazine (17%), and Newspapers (5.3%). These document images are available in three formats: PDFs, photographed documents, and scanned documents. The dataset spans 28 languages, including Arabic, Assamese,
+            Bengali, Bodo, Chinese, English, Farsi, French, Gujarati, Hindi, Indonesian, Japanese, Kannada, Korean, Malayalam, Manipuri, Marathi, Nepali, Oriya, Punjabi, Sanskrit, Sinhala, Spanish, Tamil, Telugu, Thai, Urdu, and Vietnamese. In total, the dataset contains 81,179 annotated table instances. Tables exhibit a wide variety of table layout structures, including (i) bordered tables with complete row and column separators, (ii) bordered tables without row and column separators, (iii) borderless tables with row and column separators, (iv) bordered tables with partial separators, (v) tables containing merged cells, and (vi) tables without merged cells.
+          </p>          
+        </div>
+     <!--/ UnTabBank. --> 
+
+
+    <!--/ Images of UnTabBank. --> 
+    <style>
+      .img-row {
+        display: flex;
+        justify-content: space-between;  /* spreads images left → right */
+        margin-bottom: 12px;
+      }
+
+      .img-box {
+        border: 2px solid #000;
+        padding: 4px;
+        display: inline-block;
+      }
+
+      .img-box img {
+        width: 200px; 
+        height: 250px;
+        object-fit: cover;
+      }
+    </style>
+     <div class="content has-text-justified">
+      <div class="img-row">
+        <span class="img-box"><img src="./static/images/1.jpg"></span>
+        <span class="img-box"><img src="./static/images/2.jpg"></span>
+        <span class="img-box"><img src="./static/images/3.jpg"></span>
+        <span class="img-box"><img src="./static/images/4.jpg"></span>
+      </div>
+
+      <!-- Row 2 -->
+      <div class="img-row">        
+        <span class="img-box"><img src="./static/images/5.jpg"></span>
+        <span class="img-box"><img src="./static/images/6.jpg"></span>
+        <span class="img-box"><img src="./static/images/7.jpg"></span>
+        <span class="img-box"><img src="./static/images/8.jpg"></span>
+      </div>
+      <p>
+      Examples of complex document pages with annotated table bounding boxes with blue colored rectangles across different document formats, types, layouts, and languages.
+      </p>     
+    </div>      
+    <!--/ Table of UnTabBank. --> 
+    <div class="content has-text-justified">
+      <table border="1" cellspacing="0" cellpadding="6" style="border-collapse: collapse; width:100%; font-size:14px;">
+      <thead>
+      <tr>
+          <th>Dataset</th>
+          <th>#Image</th>
+          <th>#Instance</th>
+          <th>A.M</th>
+          <th>Format</th>
+          <th>Document Type</th>
+          <th>Language</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr>
+          <td><i>ICDAR-2013</i></td>
+          <td>238</td>
+          <td>150</td>
+          <td>Manual</td>
+          <td>PDF, Scanned</td>
+          <td>Government documents</td>
+          <td>English</td>
+      </tr>
+
+      <tr>
+          <td><i>ICDAR-2019</i></td>
+          <td>1,639</td>
+          <td>3,600</td>
+          <td>Manual</td>
+          <td>PDF, Scanned</td>
+          <td>Books, Scientific journals, Forms, Financial statements</td>
+          <td>English</td>
+      </tr>
+
+      <tr>
+          <td><i>UNLV</i></td>
+          <td>2,889</td>
+          <td>558</td>
+          <td>Manual</td>
+          <td>Scanned</td>
+          <td>Technical reports, Magazines,Business letters, Newspapers</td>
+          <td>English</td>
+      </tr>
+
+      <tr>
+          <td><i>DeepFigures</i></td>
+          <td>5.5M</td>
+          <td>1.4M</td>
+          <td>Automatic</td>
+          <td>PDF</td>
+          <td>Research articles</td>
+          <td>English</td>
+      </tr>
+
+      <tr>
+          <td><i>Marmot</i></td>
+          <td>2000</td>
+          <td>958</td>
+          <td>Semi-automatic</td>
+          <td>PDF</td>
+          <td>Books and Research articles</td>
+          <td>English, Chinese</td>
+      </tr>
+
+      <tr>
+          <td><i>TNCR</i></td>
+          <td>6,621</td>
+          <td>9,428</td>
+          <td>Semi automatic</td>
+          <td>PDF, Scanned</td>
+          <td>-</td>
+          <td>English</td>
+      </tr>
+
+      <tr>
+          <td><i>STDW</i></td>
+          <td>7,000</td>
+          <td>12,431</td>
+          <td>Manual</td>
+          <td>PDF</td>
+          <td>Invoices, Research papers, Books</td>
+          <td>English, German,Japanese, Hindi, etc.</td>
+      </tr>
+
+      <tr>
+          <td><i>ICT-TD</i></td>
+          <td>5000</td>
+          <td>-</td>
+          <td>Manual</td>
+          <td>PDF</td>
+          <td>ICT commodities</td>
+          <td>English</td>
+      </tr>
+
+      <tr>
+          <td><i>TableBank</i></td>
+          <td>-</td>
+          <td>417,234</td>
+          <td>Automatic</td>
+          <td>Word and LaTeX documents</td>
+          <td>-</td>
+          <td>English, Chinese,Japanese, Arabic</td>
+      </tr>
+
+      <tr>
+          <td><i>PubTables-1M</i></td>
+          <td>1M</td>
+          <td>948K</td>
+          <td>Automatic</td>
+          <td>PDF</td>
+          <td>Scientific articles</td>
+          <td>English</td>
+      </tr>
+
+      <tr>
+          <td><b>UniTabBank (ours)</td>
+          <td>55,443</td>
+          <td>81,179</td>
+          <td>Semi automatic</td>
+          <td>PDF, Scanned, Photographed</td>
+          <td>Annual reports, Books, Magazines, Newspapers</td>
+          <td>28 languages — English, Arabic, Urdu, Hindi, etc.</td>
+      </tr>
+      </tbody>
+      </table> 
+      <p>
+        Shows table detection benchmark datasets along with UniTabBank. A.M. denotes the annotation mechanism.
+      </p>
+    </div>               
+  </div>
+</section>
+
+
+<!-- Generalization Capability of UniTabBank -->
+<section class="section">
+  <div class="container is-max-desktop">    
+     <h2 class="title is-3">Generalization Capability of UniTabBank</h2>
+        <div class="content has-text-justified">   
+          <table border="1" cellspacing="0" cellpadding="6" style="border-collapse: collapse; width:100%; font-size:14px; text-align:left;">
+          <thead>
+          <tr>
+              <th>Training Set</th>
+              <th>Test Set</th>
+              <th>AP<sub>50</sub></th>
+              <th>AP<sub>75</sub></th>
+              <th>AP</th>
+          </tr>
+          </thead>
+
+          <tbody>
+
+          <!-- PubTables section -->
+          <tr><td colspan="5" style="background:#f0f0f0; font-weight:bold; text-align:center;"></td></tr>
+
+          <tr>
+              <td><i>PubTables</i></td>
+              <td></td>
+              <td><b>0.994</b></td>
+              <td><b>0.994</b></td>
+              <td><b>0.989</b></td>
+          </tr>
+
+          <tr>
+              <td><i>TableBank</i></td>
+              <td></td>
+              <td>0.863</td>
+              <td>0.734</td>
+              <td>0.665</td>
+          </tr>
+
+          <tr>
+              <td><b>UniTabBank</b></td>
+              <td><i>PubTables</i></td>
+              <td><u>0.993</u></td>
+              <td><u>0.947</u></td>
+              <td>0.826</td>
+          </tr>
+
+          <tr>
+              <td><i>ICT-TD</i></td>
+              <td></td>
+              <td>0.981</td>
+              <td>0.933</td>
+              <td><u>0.828</u></td>
+          </tr>
+
+          <tr>
+              <td><i>TNCR</i></td>
+              <td></td>
+              <td>0.985</td>
+              <td>0.916</td>
+              <td>0.810</td>
+          </tr>
+
+          <tr>
+              <td><i>ICDAR-2019</i></td>
+              <td></td>
+              <td>0.985</td>
+              <td>0.924</td>
+              <td>0.821</td>
+          </tr>
+
+          <!-- separator -->
+          <tr><td colspan="5" style="background:#f0f0f0;"></td></tr>
+
+          <!-- TableBank section -->
+          <tr>
+              <td><i>PubTables</i></td>
+              <td></td>
+              <td>0.840</td>
+              <td>0.719</td>
+              <td>0.606</td>
+          </tr>
+
+          <tr>
+              <td><i>TableBank</i></td>
+              <td></td>
+              <td><b>0.980</b></td>
+              <td><b>0.973</b></td>
+              <td><b>0.958</b></td>
+          </tr>
+
+          <tr>
+              <td><b>UniTabBank</b></td>
+              <td><i>TableBank</i></td>
+              <td><u>0.933</u></td>
+              <td><u>0.921</u></td>
+              <td><u>0.899</u></td>
+          </tr>
+
+          <tr>
+              <td><i>ICT-TD</i></td>
+              <td></td>
+              <td>0.921</td>
+              <td>0.898</td>
+              <td>0.865</td>
+          </tr>
+
+          <tr>
+              <td><i>TNCR</i></td>
+              <td></td>
+              <td>0.916</td>
+              <td>0.895</td>
+              <td>0.871</td>
+          </tr>
+
+          <tr>
+              <td><i>ICDAR-2019</i></td>
+              <td></td>
+              <td>0.916</td>
+              <td>0.893</td>
+              <td>0.859</td>
+          </tr>
+
+          <!-- separator -->
+          <tr><td colspan="5" style="background:#f0f0f0;"></td></tr>
+
+          <!-- UniTabBank section -->
+          <tr>
+              <td><i>PubTables</i></td>
+              <td></td>
+              <td>0.601</td>
+              <td>0.528</td>
+              <td>0.441</td>
+          </tr>
+
+          <tr>
+              <td><i>TableBank</i></td>
+              <td></td>
+              <td>0.762</td>
+              <td>0.717</td>
+              <td>0.684</td>
+          </tr>
+
+          <tr>
+              <td><b>UniTabBank</b></td>
+              <td><b>UniTabBank</b></td>
+              <td><b>0.990</b></td>
+              <td><b>0.986</b></td>
+              <td><b>0.972</b></td>
+          </tr>
+
+          <tr>
+              <td><i>ICT-TD</i></td>
+              <td></td>
+              <td>0.890</td>
+              <td>0.852</td>
+              <td><u>0.819</u></td>
+          </tr>
+
+          <tr>
+              <td><i>TNCR</i></td>
+              <td></td>
+              <td>0.869</td>
+              <td>0.823</td>
+              <td>0.797</td>
+          </tr>
+
+          <tr>
+              <td><i>ICDAR-2019</i></td>
+              <td></td>
+              <td><u>0.893</u></td>
+              <td><u>0.853</u></td>
+              <td>0.818</td>
+          </tr>
+
+          <!-- separator -->
+          <tr><td colspan="5" style="background:#f0f0f0;"></td></tr>
+
+          <!-- UNLV section -->
+          <tr>
+              <td><i>PubTables</i></td>
+              <td></td>
+              <td>0.604</td>
+              <td>0.498</td>
+              <td>0.417</td>
+          </tr>
+
+          <tr>
+              <td><i>TableBank</i></td>
+              <td></td>
+              <td>0.391</td>
+              <td>0.314</td>
+              <td>0.288</td>
+          </tr>
+
+          <tr>
+              <td><b>UniTabBank</b></td>
+              <td><i>UNLV</i></td>
+              <td><b>0.914</b></td>
+              <td><b>0.854</b></td>
+              <td><b>0.773</b></td>
+          </tr>
+
+          <tr>
+              <td><i>ICT-TD</i></td>
+              <td></td>
+              <td>0.663</td>
+              <td>0.568</td>
+              <td>0.500</td>
+          </tr>
+
+          <tr>
+              <td><i>TNCR</i></td>
+              <td></td>
+              <td><u>0.806</u></td>
+              <td><u>0.723</u></td>
+              <td><u>0.635</u></td>
+          </tr>
+
+          <tr>
+              <td><i>ICDAR-2019</i></td>
+              <td></td>
+              <td>0.729</td>
+              <td>0.653</td>
+              <td>0.568</td>
+          </tr>
+
+          <!-- separator -->
+          <tr><td colspan="5" style="background:#f0f0f0;"></td></tr>
+
+          <!-- STDW section -->
+          <tr>
+              <td><i>PubTables</i></td>
+              <td></td>
+              <td>0.699</td>
+              <td>0.594</td>
+              <td>0.519</td>
+          </tr>
+
+          <tr>
+              <td><i>TableBank</i></td>
+              <td></td>
+              <td>0.675</td>
+              <td>0.642</td>
+              <td>0.632</td>
+          </tr>
+
+          <tr>
+              <td><b>UniTabBank</b></td>
+              <td><i>STDW</i></td>
+              <td><b>0.964</b></td>
+              <td><b>0.949</b></td>
+              <td><b>0.928</b></td>
+          </tr>
+
+          <tr>
+              <td><i>ICT-TD</i></td>
+              <td></td>
+              <td>0.926</td>
+              <td>0.895</td>
+              <td>0.875</td>
+          </tr>
+
+          <tr>
+              <td><i>TNCR</i></td>
+              <td></td>
+              <td>0.888</td>
+              <td>0.853</td>
+              <td>0.830</td>
+          </tr>
+
+          <tr>
+              <td><i>ICDAR-2019</i></td>
+              <td></td>
+              <td><u>0.929</u></td>
+              <td><u>0.897</u></td>
+              <td><u>0.879</u></td>
+          </tr>
+          </tbody>
+          </table>
+          <p>
+            Cross-benchmark evaluation of UniTabDet trained on different datasets and tested across multiple benchmarks. Models trained on benchmark-specific datasets achieve high in-domain accuracy but generalize poorly, whereas the models trained with UniTabBank achieve consistently strong cross-domain performance. Bold and underlined values represent the best and second best results, respectively.
+          </p>  
+    </div>
+  </div>
+</section>        
+
+<!-- Comparison with SOTA on TD Benchmarks -->
+<section class="section">
+  <div class="container is-max-desktop">    
+     <h2 class="title is-3">Comparison with SOTA on Table Detection Benchmarks</h2>
+        <div class="content has-text-justified">
+        <!-- TableBank -->
+         <h3 class="title is-4">TableBank</h3>
+          <div class="content has-text-justified">  
+          <table border="1" cellspacing="0" cellpadding="6" style="border-collapse: collapse; font-size: 14px;">
+              <thead>
+                  <tr>
+                      <th rowspan="2"><b>Method</b></th>
+                      <th colspan="2"><b>Train</b></th>
+                      <th colspan="3"><b>Test: <i>TableBank</i></b></th>
+                  </tr>
+                  <tr>
+                      <th><b>Dataset</b></th>
+                      <th><b>#Image</b></th>
+                      <th><b>P</b></th>
+                      <th><b>R</b></th>
+                      <th><b>F1</b></th>
+                  </tr>
+              </thead>
+
+              <tbody>
+                  <tr>
+                      <td>Li <em>et al.</em></td>
+                      <td><i>TableBank</i></td>
+                      <td>260,582</td>
+                      <td><b>0.966</b></td>
+                      <td>0.899</td>
+                      <td>0.931</td>
+                  </tr>
+
+                  <tr>
+                      <td>CTabNet</td>
+                      <td><i>TableBank</i></td>
+                      <td>260,582</td>
+                      <td>0.929</td>
+                      <td>0.957</td>
+                      <td><span style="text-decoration: underline;">0.943</span></td>
+                  </tr>
+
+                  <tr>
+                      <td>CDeC-Net</td>
+                      <td><i>TableBank</i></td>
+                      <td>260,582</td>
+                      <td>0.934</td>
+                      <td>0.924</td>
+                      <td>0.929</td>
+                  </tr>
+
+                  <tr>
+                      <td><b>UniTabDet</b></td>
+                      <td><b>UniTabBank</b></td>
+                      <td>55,443</td>
+                      <td>0.909</td>
+                      <td><span style="text-decoration: underline;">0.965</span></td>
+                      <td>0.936</td>
+                  </tr>
+
+                  <tr>
+                      <td><b>UniTabDet<sup>†</sup></b></td>
+                      <td><i>TableBank</i></td>
+                      <td>20,000</td>
+                      <td><span style="text-decoration: underline;">0.949</span></td>
+                      <td><b>0.979</b></td>
+                      <td><b>0.964</b></td>
+                  </tr>
+              </tbody>
+              </table>
+              <p style="font-size: 13px;">
+              <b>Table:</b> Performance evaluation on <i>TableBank</i> using precision (P), recall (R), and F1 score at IoU = 0.5. <sup>†</sup> Model fine-tuned on 20K samples from <i>TableBank</i>.         Bold = best, Underline = second-best.
+              </p>
+             </div>
+             <!-- PunTables-1M -->
+             <h3 class="title is-4">Pubtables-1M</h3>
+              <div class="content has-text-justified">  
+              <table border="1" cellspacing="0" cellpadding="6" style="border-collapse: collapse; font-size: 14px;">
+                      <thead>
+                          <tr>
+                              <th rowspan="2"><b>Model</b></th>
+                              <th colspan="2"><b>Train</b></th>
+                              <th colspan="3"><b>Test: <i>PubTables</i></b></th>
+                          </tr>
+                          <tr>
+                              <th><b>Dataset</b></th>
+                              <th><b>#Image</b></th>
+                              <th><b>AP<sub>50</sub></b></th>
+                              <th><b>AP<sub>75</sub></b></th>
+                              <th><b>AP</b></th>
+                          </tr>
+                      </thead>
+
+                      <tbody>
+                          <tr>
+                              <td>Table-Transformer</td>
+                              <td><i>PubTables</i></td>
+                              <td>460,589</td>
+                              <td><b>0.995</b></td>
+                              <td><span style="text-decoration: underline;">0.989</span></td>
+                              <td><span style="text-decoration: underline;">0.970</span></td>
+                          </tr>
+
+                          <tr>
+                              <td>TabSniper</td>
+                              <td><i>BankTabNet</i></td>
+                              <td>9,724</td>
+                              <td>0.939</td>
+                              <td>0.906</td>
+                              <td>0.852</td>
+                          </tr>
+
+                          <tr>
+                              <td>ClusterTabNet</td>
+                              <td><i>PubTables</i></td>
+                              <td>460,589</td>
+                              <td>0.990</td>
+                              <td>-</td>
+                              <td>0.989</td>
+                          </tr>
+
+                          <tr>
+                              <td><b>UniTabDet</b></td>
+                              <td><b>UniTabBank</b></td>
+                              <td>55,443</td>
+                              <td>0.993</td>
+                              <td>0.947</td>
+                              <td>0.826</td>
+                          </tr>
+
+                          <tr>
+                              <td><b>UniTabDet<sup>†</sup></b></td>
+                              <td><i>PubTables</i></td>
+                              <td>20,000</td>
+                              <td><b>0.995</b></td>
+                              <td><b>0.995</b></td>
+                              <td><b>0.994</b></td>
+                          </tr>
+                      </tbody>
+                  </table>
+
+                  <p style="font-size: 13px;">
+                      <b>Table:</b> Performance evaluation on <i>PubTables-1M</i> using object detection metrics.  
+                      <sup>†</sup> Model fine-tuned on <i>PubTables-1M</i>.  
+                      Bold = best, Underline = second-best.
+                  </p>
+                 </div>
+            </div>
+  </div>
+</section>    
+
+<!-- Ablation Study -->
+<section class="section">
+  <div class="container is-max-desktop">    
+     <h2 class="title is-3">Ablation Study</h2>
+        <div class="content has-text-justified">
+        <!-- Choice of Architecture -->
+         <h3 class="title is-4">Choice of Architecture</h3>
+          <div class="content has-text-justified">  
+          <table border="1" cellspacing="0" cellpadding="6" style="border-collapse: collapse; font-size: 14px;">
+                <thead>
+                    <tr>
+                        <th><b>Model</b></th>
+                        <th><b>AP<sub>50</sub></b></th>
+                        <th><b>AP<sub>75</sub></b></th>
+                        <th><b>AP</b></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>DocLayOut</td>
+                        <td><span style="text-decoration: underline;">0.983</span></td>
+                        <td><span style="text-decoration: underline;">0.981</span></td>
+                        <td><span style="text-decoration: underline;">0.967</span></td>
+                    </tr>
+
+                    <tr>
+                        <td>TATR</td>
+                        <td>0.919</td>
+                        <td>0.813</td>
+                        <td>0.749</td>
+                    </tr>
+
+                    <tr>
+                        <td>SparseTableDet</td>
+                        <td>0.927</td>
+                        <td>0.8992</td>
+                        <td>0.874</td>
+                    </tr>
+
+                    <tr>
+                        <td>Mask R-CNN</td>
+                        <td>0.901</td>
+                        <td>0.785</td>
+                        <td>0.698</td>
+                    </tr>
+
+                    <tr>
+                        <td><b>UniTabDet</b></td>
+                        <td><b>0.990</b></td>
+                        <td><b>0.986</b></td>
+                        <td><b>0.972</b></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p style="font-size: 13px;">
+                <b>Table:</b> Comparison of <b>UniTabDet</b> with DocLayOut, TATR, SparseTableDet, and Mask R-CNN on <b>UniTabBank</b>. Bold = best, Underline = second-best.
+            </p>
+
+             </div>
+             <!-- Model Parameters -->
+             <h3 class="title is-4">Model Parameters</h3>
+              <div class="content has-text-justified">  
+              <table border="1" cellspacing="0" cellpadding="6" style="border-collapse: collapse; font-size: 14px; text-align:left;">
+                    <thead>
+                        <tr>
+                            <th><b>Model</b></th>
+                            <th><b>#Parameters (M)</b></th>
+                            <th><b>AP<sub>50</sub></b></th>
+                            <th><b>AP<sub>75</sub></b></th>
+                            <th><b>AP</b></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>UniTabDet (n)</td>
+                            <td>2.6</td>
+                            <td>0.9895</td>
+                            <td>0.9848</td>
+                            <td>0.9672</td>
+                        </tr>
+
+                        <tr>
+                            <td>UniTabDet (s)</td>
+                            <td>9.4</td>
+                            <td>0.9894</td>
+                            <td>0.9852</td>
+                            <td>0.9676</td>
+                        </tr>
+
+                        <tr>
+                            <td>UniTabDet (m)</td>
+                            <td>20.1</td>
+                            <td>0.9895</td>
+                            <td>0.9852</td>
+                            <td>0.9704</td>
+                        </tr>
+
+                        <tr>
+                            <td>UniTabDet (l)</td>
+                            <td>25.3</td>
+                            <td><span style="text-decoration: underline;">0.9897</span></td>
+                            <td><span style="text-decoration: underline;">0.9854</span></td>
+                            <td><span style="text-decoration: underline;">0.9709</span></td>
+                        </tr>
+
+                        <tr>
+                            <td><b>UniTabDet (x)</b></td>
+                            <td><b>56.9</b></td>
+                            <td><b>0.9902</b></td>
+                            <td><b>0.9857</b></td>
+                            <td><b>0.9719</b></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p style="font-size: 13px;">
+                    <b>Table:</b> Performance comparison on <b>UniTabBank</b> using UniTabDet model variants (n/s/m/l/x = tiny → extra-large).
+                </p>
+                </div>
+
+                <!-- Importance of Language -->
+               <h3 class="title is-4">Importance of Language</h3>
+                <div class="content has-text-justified">  
+                <table border="1" cellspacing="0" cellpadding="6" style="border-collapse: collapse; font-size:14px; text-align:center;">
+                    <thead>
+                        <tr>
+                            <th><b>Model</b></th>
+                            <th><b>Blur</b></th>
+                            <th><b>AP<sub>50</sub></b></th>
+                            <th><b>AP<sub>75</sub></b></th>
+                            <th><b>AP</b></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td><b>UniTabDet<sup>α</sup></b></td>
+                            <td>Gaussian</td>
+                            <td><span style="text-decoration: underline;">0.9890</span></td>
+                            <td><span style="text-decoration: underline;">0.9834</span></td>
+                            <td><span style="text-decoration: underline;">0.9620</span></td>
+                        </tr>
+
+                        <tr>
+                            <td><b>UniTabDet<sup>β</sup></b></td>
+                            <td>Median</td>
+                            <td>0.9837</td>
+                            <td>0.9718</td>
+                            <td>0.9442</td>
+                        </tr>
+
+                        <tr>
+                            <td><b>UniTabDet<sup>γ</sup></b></td>
+                            <td>Average</td>
+                            <td>0.9800</td>
+                            <td>0.9684</td>
+                            <td>0.9371</td>
+                        </tr>
+
+                        <tr>
+                            <td><b>UniTabDet</b></td>
+                            <td>-</td>
+                            <td><b>0.9902</b></td>
+                            <td><b>0.9857</b></td>
+                            <td><b>0.9719</b></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p style="font-size:13px;">
+                    <b>Table:</b> Performance comparison between the original <b>UniTabDet</b> and blurred variants on <b>UniTabBank</b>.
+                </p>
+
+                </div>
+
+
+            </div>
+  </div>
+</section>     
+    
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@inproceedings{mondal2026unitabbank,
+  author    = {Ajoy Mondal, Saumya Mundra, Avijit Dasgupta, C. V. Jawahar},
+  title     = {UniTabBank: A Large Scale Multi-Lingual, Multi-Layout, Multi-Type, Multi-Format Dataset for Table Detection},
+  booktitle   = {WACV},
+  year      = {2026},
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>Inspired by <a rel="Nerfies" href="https://nerfies.github.io/">this website is created</a>.   
+          </p>
+          </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
